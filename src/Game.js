@@ -10,8 +10,6 @@ class Game extends Component {
             value2: valuesArray[1],
             value3: valuesArray[2],
             proposedAnswer: valuesArray[3],
-            correctAnswer: 0,
-            numQuestions: 0,
         };
     }
 
@@ -27,7 +25,7 @@ class Game extends Component {
         const newValuesArray = this.makeNewQuestion();
         this.updateState(newValuesArray);
         const answerWasCorrect = this.evaluateAnswer(event.target.name);
-        this.handleResult(answerWasCorrect);
+        this.props.handleResult(answerWasCorrect);
     };
 
     updateState = newValuesArray => {
@@ -36,17 +34,6 @@ class Game extends Component {
             value2: newValuesArray[1],
             value3: newValuesArray[2],
             proposedAnswer: newValuesArray[3],
-        }));
-    };
-
-    handleResult = answerWasCorrect => {
-        if (answerWasCorrect) {
-            this.setState(currState => ({
-                correctAnswer: currState.correctAnswer + 1,
-            }));
-        }
-        this.setState(currState => ({
-            numQuestions: currState.numQuestions + 1,
         }));
     };
 
@@ -61,7 +48,7 @@ class Game extends Component {
     }
 
     render() {
-        const { value1, value2, value3, proposedAnswer, correctAnswer, numQuestions } = this.state;
+        const { value1, value2, value3, proposedAnswer} = this.state;
         return (
             <div>
                 <div className="equation">
@@ -73,9 +60,6 @@ class Game extends Component {
                 <button onClick={this.handleAnswer} name="false" >
                     False
                 </button>
-                <p className="text">
-                    Your Score: {correctAnswer}/{numQuestions}
-                </p>
             </div>
         );
     }

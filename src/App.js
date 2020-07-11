@@ -2,11 +2,26 @@ import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
 import Game from './Game';
-
-// const numQuestions = 0;
-// const numCorrect = 0;
+import Score from './score';
 
 class App extends Component {
+
+  state = {
+    correctAnswer: 0,
+    numQuestions: 0,
+  };
+  
+  handleResult = answerWasCorrect => {
+    if (answerWasCorrect) {
+        this.setState(currState => ({
+            correctAnswer: currState.correctAnswer + 1,
+        }));
+    }
+    this.setState(currState => ({
+        numQuestions: currState.numQuestions + 1,
+    }));
+  };
+
   render() {
     return (
       <div className="App">
@@ -16,7 +31,8 @@ class App extends Component {
         </header>
         <div className="game">
           <h2>Mental Math</h2>
-          <Game />
+          <Game handleResult = {this.handleResult}/>
+          <Score numCorrect={this.state.correctAnswer} numQuestions={this.state.numQuestions} />
         </div>
       </div>
     );
