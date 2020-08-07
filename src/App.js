@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
 import Game from './Game';
-import Score from './score';
+import Score from './Score';
 
 class App extends Component {
 

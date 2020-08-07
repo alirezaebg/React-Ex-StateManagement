@@ -11,6 +11,7 @@ class Game extends Component {
             value3: valuesArray[2],
             proposedAnswer: valuesArray[3],
         };
+        this.handleAnswer = this.handleAnswer.bind(this);
     }
 
     makeNewQuestion = () => {
@@ -21,7 +22,7 @@ class Game extends Component {
         return [value1, value2, value3, proposedAnswer];
     };
 
-    handleAnswer = event => {
+    handleAnswer(event) {
         const newValuesArray = this.makeNewQuestion();
         this.updateState(newValuesArray);
         const answerWasCorrect = this.evaluateAnswer(event.target.name);
